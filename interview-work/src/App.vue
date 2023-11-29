@@ -136,7 +136,7 @@ export default {
       username: "",
       password: "",
       confirmPassword: "",
-      memberName: "",
+      memberName: "", 
     };
   },
   methods: {
@@ -155,14 +155,6 @@ export default {
     },
     closeImagePopup() {
       this.showImagePopup = false;
-    },
-    validatePassword() {
-      if (this.password.length < 8) {
-      }
-    },
-    validateConfirmPassword() {
-      if (this.password !== this.confirmPassword) {
-      }
     },
   },
 };
@@ -184,13 +176,13 @@ export default {
 }
 
 .modal-content {
-  background-color: white;
+  background-color: white; /* 设定 Modal 内容的背景颜色 */
   max-width: 400px;
-  margin: auto;
+  margin: auto; /* 水平居中 */
 }
 
 .modal-background {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5); /* 使用 rgba 设置半透明黑色 */
   position: fixed;
   top: 0;
   right: 0;
@@ -201,7 +193,7 @@ export default {
 .modal-background,
 .modal-content,
 .modal-close {
-  z-index: 10;
+  z-index: 10; /* 確保模態框在最上層 */
 }
 .cursor-pointer {
   cursor: pointer;
