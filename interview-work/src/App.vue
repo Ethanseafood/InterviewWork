@@ -1,31 +1,37 @@
 <template>
   <div>
-    <nav class="navbar navbar-light bg-light">
-      <div class="container">
-        <img
-          src="@/assets/memberIcon.png"
-          class="cursor-pointer icon"
-          alt="member icon"
-          width="30"
-          height="30"
-          @click="toggleLoginPopup"
-        />
-        <span id="memberName" class="navbar-text">{{ memberName }}</span>
-        <img
-          src="@/assets/imageIcon.png"
-          class="cursor-pointer icon"
-          alt="image icon"
-          width="30"
-          height="30"
-          @click="toggleImagePopup"
-        />
-        <img
-          src="@/assets/calendarIcon.png"
-          class="cursor-pointer icon"
-          alt="calendar icon"
-          width="30"
-          height="30"
-        />
+    <nav class="navbar-light bg-light">
+      <div class="container d-flex justify-content-evenly">
+        <div class="login">
+          <img
+            src="@/assets/memberIcon.png"
+            class="cursor-pointer icon"
+            alt="member icon"
+            width="30"
+            height="30"
+            @click="toggleLoginPopup"
+          />
+          <span id="memberName" class="navbar-text">{{ memberName }}</span>
+        </div>
+        <div>
+          <img
+            src="@/assets/imageIcon.png"
+            class="cursor-pointer icon"
+            alt="image icon"
+            width="30"
+            height="30"
+            @click="toggleImagePopup"
+          />
+        </div>
+        <div class="calendar">
+          <input
+            type="date"
+            id="start"
+            name="trip-start"
+            min="2018-01-01"
+            max="2023-12-31"
+          />
+        </div>
       </div>
     </nav>
 
@@ -45,6 +51,7 @@
                   class="input"
                   type="text"
                   placeholder="請輸入使用者名稱"
+                  autocomplete="off"
                 />
               </div>
             </div>
@@ -56,12 +63,45 @@
                   class="input"
                   type="password"
                   placeholder="請輸入密碼"
+                  autocomplete="off"
                 />
               </div>
             </div>
             <div class="field">
+              <label for="passConf" class="label">再次確認密碼</label>
               <div class="control">
-                <button type="submit" class="button is-primary">提交</button>
+                <input
+                  id="passConf"
+                  v-model="confirmPassword"
+                  class="input"
+                  type="password"
+                  placeholder="請輸入密碼"
+                  @keyup="validateConfirmPassword"
+                />
+                <span
+                  id="passwordLengthLimit"
+                  v-if="password.length < 8 && password.length != 0"
+                  >字數需要大於8位</span
+                >
+                <br />
+                <span id="passwordNotMatch" v-if="password !== confirmPassword"
+                  >密碼不一致</span
+                >
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button
+                  :disabled="
+                    password.length < 8 ||
+                    password !== confirmPassword ||
+                    username.length == 0
+                  "
+                  type="submit"
+                  class="button is-primary"
+                >
+                  提交
+                </button>
               </div>
             </div>
           </form>
@@ -95,6 +135,7 @@ export default {
       showImagePopup: false,
       username: "",
       password: "",
+      confirmPassword: "",
       memberName: "", // 顯示使用者名稱
     };
   },
@@ -117,12 +158,27 @@ export default {
     closeImagePopup() {
       this.showImagePopup = false;
     },
+    validatePassword() {
+      if (this.password.length < 8) {
+        // 密码小于8个字符时显示消息
+        // 你也可以在这里加入其他逻辑
+      }
+    },
+    validateConfirmPassword() {
+      if (this.password !== this.confirmPassword) {
+        // 密码不一致时显示消息
+        // 你也可以在这里加入其他逻辑
+      }
+    },
   },
 };
 </script>
 
 <style>
 @import "bulma/css/bulma.css";
+.container {
+  display: flex;
+}
 .modal {
   display: none;
 }
@@ -155,5 +211,10 @@ export default {
 }
 .cursor-pointer {
   cursor: pointer;
+}
+
+#passwordLengthLimit,
+#passwordNotMatch {
+  color: red;
 }
 </style>
