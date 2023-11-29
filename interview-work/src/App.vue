@@ -136,7 +136,7 @@ export default {
       username: "",
       password: "",
       confirmPassword: "",
-      memberName: "", // 顯示使用者名稱
+      memberName: "",
     };
   },
   methods: {
@@ -147,8 +147,6 @@ export default {
       this.showLoginPopup = false;
     },
     submitForm() {
-      // 在這裡處理表單提交，例如驗證使用者名稱和密碼
-      // 假設表單驗證成功，將使用者名稱設置並關閉彈出視窗
       this.memberName = this.username;
       this.closeLoginPopup();
     },
@@ -160,14 +158,10 @@ export default {
     },
     validatePassword() {
       if (this.password.length < 8) {
-        // 密码小于8个字符时显示消息
-        // 你也可以在这里加入其他逻辑
       }
     },
     validateConfirmPassword() {
       if (this.password !== this.confirmPassword) {
-        // 密码不一致时显示消息
-        // 你也可以在这里加入其他逻辑
       }
     },
   },
@@ -190,13 +184,13 @@ export default {
 }
 
 .modal-content {
-  background-color: white; /* 设定 Modal 内容的背景颜色 */
+  background-color: white;
   max-width: 400px;
-  margin: auto; /* 水平居中 */
+  margin: auto;
 }
 
 .modal-background {
-  background-color: rgba(0, 0, 0, 0.5); /* 使用 rgba 设置半透明黑色 */
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   right: 0;
@@ -207,7 +201,7 @@ export default {
 .modal-background,
 .modal-content,
 .modal-close {
-  z-index: 10; /* 確保模態框在最上層 */
+  z-index: 10;
 }
 .cursor-pointer {
   cursor: pointer;
